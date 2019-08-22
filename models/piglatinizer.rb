@@ -14,17 +14,23 @@ class PigLatinizer
   
   def piglatinize_word(sample)
     vowels = ["a","e","i","o","u","I","E","O","U"]
-    word = sample.split("")
     result_array =[]
 
-    if vowels.include? word[0]
-      result_array.push word << 'way'
+    if vowels.include? sample[0]
+      result_array.push sample << 'way'
+    elsif vowels.include? sample[1]
+      first_letter = sample.slice!(0)
+      result_array.push sample << first_letter << 'ay'
+    elsif vowels.include? sample[2]
+      first_two = sample.slice!(0..1)
+      result_array.push sample << first_two << 'ay'
     else
-      first_letter = word.slice!(0)
-      result_array.push word << first_letter << 'ay'
+      first_three = sample.slice!(0..2)
+      result_array.push sample << first_three << 'ay'
     end 
     
     return result_array.join("")
     
   end
 end
+
